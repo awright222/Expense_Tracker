@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { supabase } from '../lib/supabase'; // Supabase client
+import { supabase } from '../../src/lib/supabase'; // Supabase client
 import '../styles/globals.css'; // Make sure Tailwind CSS is imported
 
 function MyApp({ Component, pageProps }) {
