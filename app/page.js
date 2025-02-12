@@ -63,6 +63,21 @@ export default function LandingPage() {
                     <li>📈 Visualize your spending trends with charts and insights.</li>
                 </ul>
             </div>
+
+            {/* Commenting out this section to hide the groups */}
+            {/* 
+            <div>
+                <h2>Groups</h2>
+                <button onClick={addTestGroup}>Add Test Group</button>
+                <ul>
+                    {groups.length > 0 ? (
+                        groups.map((group) => <li key={group.id}>{group.name}</li>)
+                    ) : (
+                        <p>No groups found.</p>
+                    )}
+                </ul>
+            </div>
+            */}
         </div>
     );
 }

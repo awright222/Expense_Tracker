@@ -1,5 +1,6 @@
+// pages/login.js
 import { useState } from 'react';
-import { logIn } from '../../src/lib/auth';
+import { logIn } from '@/lib/auth';
 
 export default function LogIn() {
   const [email, setEmail] = useState('');
@@ -18,6 +19,7 @@ export default function LogIn() {
 
   return (
     <div>
+      <h1>Log In</h1>
       <form onSubmit={handleLogIn}>
         <input
           type="email"

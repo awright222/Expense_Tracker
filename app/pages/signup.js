@@ -1,5 +1,6 @@
+// pages/signup.js
 import { useState } from 'react';
-import { signUp } from '../../src/lib/auth';
+import { signUp } from '@/lib/auth';
 
 export default function SignUp() {
   const [email, setEmail] = useState('');
@@ -11,13 +12,14 @@ export default function SignUp() {
     const { user, error } = await signUp(email, password);
     if (error) setError(error.message);
     else {
-      // Redirect to login or dashboard
+      // Redirect to dashboard
       alert('Signed up successfully!');
     }
   };
 
   return (
     <div>
+      <h1>Sign Up</h1>
       <form onSubmit={handleSignUp}>
         <input
           type="email"
