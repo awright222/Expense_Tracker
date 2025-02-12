@@ -1,8 +1,7 @@
-// pages/login.js
 import { useState } from 'react';
-import { logIn } from '@/lib/auth';
+import { logIn } from '../src/lib/auth';
 
-export default function LogIn() {
+export default function LogIn({ onClose }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -12,8 +11,8 @@ export default function LogIn() {
     const { user, error } = await logIn(email, password);
     if (error) setError(error.message);
     else {
-      // Redirect to dashboard
       alert('Logged in successfully!');
+      onClose();
     }
   };
 

@@ -1,8 +1,8 @@
-// pages/signup.js
-import { useState } from 'react';
-import { signUp } from '@/lib/auth';
 
-export default function SignUp() {
+import { useState } from 'react';
+import { signUp } from '../src/lib/auth';
+
+export default function SignUp({ onClose }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -12,8 +12,8 @@ export default function SignUp() {
     const { user, error } = await signUp(email, password);
     if (error) setError(error.message);
     else {
-      // Redirect to dashboard
       alert('Signed up successfully!');
+      onClose();
     }
   };
 
