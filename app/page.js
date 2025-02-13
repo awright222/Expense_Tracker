@@ -34,33 +34,41 @@ export default function LandingPage() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-r from-blue-500 to-teal-400 text-white flex flex-col justify-center items-center text-center p-8">
-            <h1 className="text-5xl font-bold mb-4">Welcome to Your Expense Tracker</h1>
-            <p className="text-xl mb-8 max-w-lg">
+        <div className="min-h-screen bg-gradient-to-r from-[#3C6E71] to-[#284B63] text-white flex flex-col justify-center items-center text-center p-8">
+            <h1 className="text-5xl font-bold mb-4 text-[#FFFFFF]">Welcome to Your Expense Tracker</h1>
+            <p className="text-xl mb-8 max-w-lg text-[#D9D9D9]">
                 Keep track of your personal and group expenses in one easy-to-use app. 
                 Simplify your finances and always stay on top of your budget!
             </p>
 
             <div className="space-x-4 mb-8">
                 <Link href="/login">
-                    <button className="bg-teal-700 text-white py-2 px-6 rounded-md hover:bg-teal-800 transition-all">
+                    <button className="bg-[#284B63] text-white py-2 px-6 rounded-md hover:bg-[#3C6E71] transition-all shadow-lg">
                         Log In
                     </button>
                 </Link>
                 <Link href="/signup">
-                    <button className="bg-blue-700 text-white py-2 px-6 rounded-md hover:bg-blue-800 transition-all">
+                    <button className="bg-[#353535] text-white py-2 px-6 rounded-md hover:bg-[#3C6E71] transition-all shadow-lg">
                         Sign Up
                     </button>
                 </Link>
             </div>
 
             <div className="max-w-4xl space-y-4 mb-8">
-                <h2 className="text-3xl font-semibold">Features</h2>
-                <ul className="space-y-2 text-lg">
-                    <li>📊 Track personal and group expenses.</li>
-                    <li>💸 Split expenses among friends, family, or colleagues.</li>
-                    <li>🔔 Stay notified when new expenses are added.</li>
-                    <li>📈 Visualize your spending trends with charts and insights.</li>
+                <h2 className="text-3xl font-semibold text-[#FFFFFF]">Features</h2>
+                <ul className="space-y-2 text-lg text-[#D9D9D9]">
+                    <li className="flex items-center">
+                        <span className="mr-2">📊</span> Track personal and group expenses.
+                    </li>
+                    <li className="flex items-center">
+                        <span className="mr-2">💸</span> Split expenses among friends, family, or colleagues.
+                    </li>
+                    <li className="flex items-center">
+                        <span className="mr-2">🔔</span> Stay notified when new expenses are added.
+                    </li>
+                    <li className="flex items-center">
+                        <span className="mr-2">📈</span> Visualize your spending trends with charts and insights.
+                    </li>
                 </ul>
             </div>
 
