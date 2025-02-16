@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../src/lib/supabase";
 import Link from "next/link";
-import Image from "next/image"; // Import Image component from Next.js
+import Image from "next/image";
 
 export default function LandingPage() {
     const [groups, setGroups] = useState([]);
@@ -36,7 +36,7 @@ export default function LandingPage() {
 
     return (
         <div className="min-h-screen bg-gradient-to-r from-[#3C6E71] to-[#284B63] text-white flex flex-col justify-center items-center text-center p-4 md:p-8">
-            {/* Logo and PennyPlanner text */}
+            
             <div className="mb-8">
                 <Image src="/logo.png" alt="Logo" width={100} height={100} className="mx-auto" />
                 <h1 className="text-4xl md:text-5xl font-bold text-[#FFFFFF]">PennyPlanner</h1>

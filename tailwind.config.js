@@ -1,4 +1,3 @@
-// filepath: /Users/alexwright/Desktop/coding/Expense_Tracker/expense-tracker/tailwind.config.js
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [

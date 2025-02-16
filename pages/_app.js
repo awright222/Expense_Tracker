@@ -1,14 +1,10 @@
+import '../app/globals.css';
 import { useEffect, useState } from 'react';
 import { supabase } from '../src/lib/supabase';
-import '../app/globals.css';
-import Modal from '../app/components/Modal';
-import LogIn from './login';
-import SignUp from './signup';
+import Link from 'next/link';
 
 function MyApp({ Component, pageProps }) {
   const [session, setSession] = useState(null);
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const [isSignUpOpen, setIsSignUpOpen] = useState(false);
 
   useEffect(() => {
     const getSession = async () => {
@@ -29,19 +25,25 @@ function MyApp({ Component, pageProps }) {
     };
   }, []);
 
+  const handleOAuthLogin = async (provider) => {
+    const { error } = await supabase.auth.signInWithOAuth({ provider });
+    if (error) console.error('OAuth login error:', error.message);
+  };
+
   if (!session) {
     return (
       <div>
-        <button onClick={() => setIsLoginOpen(true)}>Log In</button>
-        <button onClick={() => setIsSignUpOpen(true)}>Sign Up</button>
-
-        <Modal isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)}>
-          <LogIn onClose={() => setIsLoginOpen(false)} />
-        </Modal>
-
-        <Modal isOpen={isSignUpOpen} onClose={() => setIsSignUpOpen(false)}>
-          <SignUp onClose={() => setIsSignUpOpen(false)} />
-        </Modal>
+        <Link href="/login">
+          <button>Log In</button>
+        </Link>
+        <Link href="/signup">
+          <button>Sign Up</button>
+        </Link>
+        <button onClick={() => handleOAuthLogin('google')}>Log In with Google</button>
+        <button onClick={() => handleOAuthLogin('github')}>Log In with GitHub</button>
+        <button onClick={() => handleOAuthLogin('facebook')}>Log In with Facebook</button>
+        <button onClick={() => handleOAuthLogin('twitter')}>Log In with Twitter</button>
+        <button onClick={() => handleOAuthLogin('apple')}>Log In with Apple</button>
       </div>
     );
   }
