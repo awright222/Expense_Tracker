@@ -1,10 +1,12 @@
 import '../app/globals.css';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { supabase } from '../src/lib/supabase';
 import Link from 'next/link';
 
 function MyApp({ Component, pageProps }) {
   const [session, setSession] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
     const getSession = async () => {
@@ -30,7 +32,7 @@ function MyApp({ Component, pageProps }) {
     if (error) console.error('OAuth login error:', error.message);
   };
 
-  if (!session) {
+  if (!session && router.pathname !== '/login' && router.pathname !== '/signup') {
     return (
       <div>
         <Link href="/login">

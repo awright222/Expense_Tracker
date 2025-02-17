@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { signUp } from '../src/lib/auth';
+import { supabase } from '../src/lib/supabase';
 import Link from 'next/link';
 
 export default function SignUp() {
@@ -12,6 +13,11 @@ export default function SignUp() {
     const { user, error } = await signUp(email, password);
     if (error) setError(error.message);
     else alert('Signed up successfully!');
+  };
+
+  const handleOAuthLogin = async (provider) => {
+    const { error } = await supabase.auth.signInWithOAuth({ provider });
+    if (error) console.error('OAuth login error:', error.message);
   };
 
   return (
@@ -37,8 +43,13 @@ export default function SignUp() {
         <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded">Sign Up</button>
         {error && <p className="text-red-500 mt-4">{error}</p>}
       </form>
+      <button onClick={() => handleOAuthLogin('google')} className="w-full bg-red-500 text-white p-2 rounded mt-2">Sign Up with Google</button>
+      <button onClick={() => handleOAuthLogin('github')} className="w-full bg-gray-800 text-white p-2 rounded mt-2">Sign Up with GitHub</button>
+      <button onClick={() => handleOAuthLogin('facebook')} className="w-full bg-blue-600 text-white p-2 rounded mt-2">Sign Up with Facebook</button>
+      <button onClick={() => handleOAuthLogin('twitter')} className="w-full bg-blue-400 text-white p-2 rounded mt-2">Sign Up with Twitter</button>
+      
       <Link href="/login">
-        <a className="mt-4 text-blue-500">Already have an account? Log In</a>
+        <span className="mt-4 text-blue-500">Already have an account? Log In</span>
       </Link>
     </div>
   );

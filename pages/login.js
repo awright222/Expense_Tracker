@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { logIn } from '../src/lib/auth';
+import { supabase } from '../src/lib/supabase';
 import Link from 'next/link';
 
 export default function LogIn() {
@@ -12,6 +13,11 @@ export default function LogIn() {
     const { user, error } = await logIn(email, password);
     if (error) setError(error.message);
     else alert('Logged in successfully!');
+  };
+
+  const handleOAuthLogin = async (provider) => {
+    const { error } = await supabase.auth.signInWithOAuth({ provider });
+    if (error) console.error('OAuth login error:', error.message);
   };
 
   return (
@@ -37,8 +43,13 @@ export default function LogIn() {
         <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded">Log In</button>
         {error && <p className="text-red-500 mt-4">{error}</p>}
       </form>
+      <button onClick={() => handleOAuthLogin('google')} className="w-full bg-red-500 text-white p-2 rounded mt-2">Log In with Google</button>
+      <button onClick={() => handleOAuthLogin('github')} className="w-full bg-gray-800 text-white p-2 rounded mt-2">Log In with GitHub</button>
+      <button onClick={() => handleOAuthLogin('facebook')} className="w-full bg-blue-600 text-white p-2 rounded mt-2">Log In with Facebook</button>
+      <button onClick={() => handleOAuthLogin('twitter')} className="w-full bg-blue-400 text-white p-2 rounded mt-2">Log In with Twitter</button>
+      <button onClick={() => handleOAuthLogin('apple')} className="w-full bg-black text-white p-2 rounded mt-2">Log In with Apple</button>
       <Link href="/signup">
-        <a className="mt-4 text-blue-500">Don't have an account? Sign Up</a>
+        <span className="mt-4 text-blue-500">Don't have an account? Sign Up</span>
       </Link>
     </div>
   );
