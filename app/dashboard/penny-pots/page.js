@@ -14,7 +14,7 @@ export default function PennyPots() {
         if (!newPotName.trim()) return;
 
         const newPot = {
-            id: pots.length + 1,
+            id: Date.now(), // Ensure unique ID
             name: newPotName,
             total: 0,
         };
@@ -35,12 +35,12 @@ export default function PennyPots() {
                 {pots.length > 0 ? (
                     <ul className="space-y-4">
                         {pots.map((pot) => (
-                            <Link key={pot.id} href={`/dashboard/penny-pots/${pot.id}`}>
-                                <li className="bg-[#284B63] p-4 rounded-md shadow-md hover:bg-[#3C6E71] transition-all cursor-pointer">
+                            <li key={pot.id} className="bg-[#284B63] p-4 rounded-md shadow-md hover:bg-[#3C6E71] transition-all cursor-pointer">
+                                <Link href={`/dashboard/penny-pots/${pot.id}`} className="block">
                                     <p className="text-xl font-semibold">{pot.name}</p>
                                     <p className="text-sm text-[#D9D9D9]">Total Spent: ${pot.total}</p>
-                                </li>
-                            </Link>
+                                </Link>
+                            </li>
                         ))}
                     </ul>
                 ) : (
@@ -54,12 +54,16 @@ export default function PennyPots() {
                     type="text"
                     value={newPotName}
                     onChange={(e) => setNewPotName(e.target.value)}
+                    onKeyPress={(e) => e.key === "Enter" && addPennyPot()}
                     placeholder="New Penny Pot Name"
-                    className="p-2 rounded-md text-black"
+                    className="p-2 rounded-md bg-white text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#3C6E71]"
                 />
                 <button
                     onClick={addPennyPot}
-                    className="bg-[#353535] px-4 py-2 rounded-md hover:bg-[#284B63] transition-all"
+                    disabled={!newPotName.trim()}
+                    className={`px-4 py-2 rounded-md transition-all ${
+                        newPotName.trim() ? "bg-[#353535] hover:bg-[#284B63]" : "bg-gray-500 cursor-not-allowed"
+                    }`}
                 >
                     Add
                 </button>

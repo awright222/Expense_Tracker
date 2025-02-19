@@ -1,8 +1,10 @@
-import '../app/globals.css';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import { supabase } from '../src/lib/supabase';
-import Link from 'next/link';
+import "../app/globals.css";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { supabase } from "../src/lib/supabase";
+import Link from "next/link";
+import { Provider } from "react-redux";
+import { store } from "../src/store/store";
 
 function MyApp({ Component, pageProps }) {
   const [session, setSession] = useState(null);
@@ -29,10 +31,10 @@ function MyApp({ Component, pageProps }) {
 
   const handleOAuthLogin = async (provider) => {
     const { error } = await supabase.auth.signInWithOAuth({ provider });
-    if (error) console.error('OAuth login error:', error.message);
+    if (error) console.error("OAuth login error:", error.message);
   };
 
-  if (!session && router.pathname !== '/login' && router.pathname !== '/signup') {
+  if (!session && router.pathname !== "/login" && router.pathname !== "/signup") {
     return (
       <div>
         <Link href="/login">
@@ -41,16 +43,20 @@ function MyApp({ Component, pageProps }) {
         <Link href="/signup">
           <button>Sign Up</button>
         </Link>
-        <button onClick={() => handleOAuthLogin('google')}>Log In with Google</button>
-        <button onClick={() => handleOAuthLogin('github')}>Log In with GitHub</button>
-        <button onClick={() => handleOAuthLogin('facebook')}>Log In with Facebook</button>
-        <button onClick={() => handleOAuthLogin('twitter')}>Log In with Twitter</button>
-        <button onClick={() => handleOAuthLogin('apple')}>Log In with Apple</button>
+        <button onClick={() => handleOAuthLogin("google")}>Log In with Google</button>
+        <button onClick={() => handleOAuthLogin("github")}>Log In with GitHub</button>
+        <button onClick={() => handleOAuthLogin("facebook")}>Log In with Facebook</button>
+        <button onClick={() => handleOAuthLogin("twitter")}>Log In with Twitter</button>
+        <button onClick={() => handleOAuthLogin("apple")}>Log In with Apple</button>
       </div>
     );
   }
 
-  return <Component {...pageProps} />;
+  return (
+    <Provider store={store}>
+      <Component {...pageProps} />
+    </Provider>
+  );
 }
 
 export default MyApp;
